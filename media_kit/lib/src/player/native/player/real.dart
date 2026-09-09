@@ -21,6 +21,7 @@ import 'package:media_kit/src/models/audio_params.dart';
 import 'package:media_kit/src/models/video_params.dart';
 import 'package:media_kit/src/models/playlist_mode.dart';
 import 'package:media_kit/src/models/subtitle.dart';
+import 'package:media_kit/src/player/native/utils/track_metadata.dart';
 import 'package:media_kit/src/player/platform_player.dart';
 import 'package:media_kit/src/player/native/utils/native_reference_holder.dart';
 import 'package:media_kit/src/player/native/utils/android_helper.dart';
@@ -1256,6 +1257,7 @@ class NativePlayer extends PlatformPlayer {
                     int? rotate;
                     double? par;
                     int? audiochannels;
+                    final metadata = <String, String>{};
                     bool selected = false;
                     for (int j = 0; j < map.num; j++) {
                       final property = map.keys[j].toDartString();
@@ -1275,6 +1277,24 @@ class NativePlayer extends PlatformPlayer {
                               decoder = value;
                             case 'demux-channels':
                               channels = value;
+                          }
+                        case generated.mpv_format.MPV_FORMAT_NODE_MAP:
+                          if (property == 'metadata') {
+                            final metadataList = map.values[j].u.list;
+                            if (metadataList.address == 0) break;
+                            final metadataMap = metadataList.ref;
+                            for (int k = 0; k < metadataMap.num; k++) {
+                              final key = metadataMap.keys[k];
+                              final value = metadataMap.values[k];
+                              if (key.address == 0 ||
+                                  value.format !=
+                                      generated.mpv_format.MPV_FORMAT_STRING ||
+                                  value.u.string.address == 0) {
+                                continue;
+                              }
+                              metadata[key.toDartString()] = value.u.string
+                                  .toDartString();
+                            }
                           }
                         case generated.mpv_format.MPV_FORMAT_FLAG:
                           switch (property) {
@@ -1315,6 +1335,11 @@ class NativePlayer extends PlatformPlayer {
                           }
                       }
                     }
+                    final effectiveTitle = resolveTrackTitle(
+                      type: type,
+                      title: title,
+                      handlerName: metadata['handler_name'],
+                    );
                     switch (type) {
                       case 'video':
                         final track = VideoTrack(
@@ -1343,7 +1368,7 @@ class NativePlayer extends PlatformPlayer {
                       case 'audio':
                         final track = AudioTrack(
                           id,
-                          title,
+                          effectiveTitle,
                           language,
                           image: image,
                           albumart: albumart,
