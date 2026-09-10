@@ -1,3 +1,7 @@
+## 1.1.6
+
+- build: bump libmpv to mpv v0.41.0 (libmpv-darwin-build v0.8.4)
+
 ## 1.1.5
 
 - feat: add Swift Package Manager support
