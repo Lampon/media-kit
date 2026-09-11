@@ -1,3 +1,7 @@
+## 1.0.13
+
+- build: bump libmpv to mpv v0.41.0 (git-41f6a64, from Lampon/libmpv-win32-video-cmake)
+
 ## 1.0.12
 
 - feat: support ARM64
