@@ -71,15 +71,15 @@ string(TOLOWER "${CMAKE_SYSTEM_PROCESSOR}" LIBMPV_TARGET_PROCESSOR)
 string(TOLOWER "${CMAKE_GENERATOR_PLATFORM}" LIBMPV_GENERATOR_PLATFORM)
 
 if(LIBMPV_TARGET_PROCESSOR MATCHES "^(arm64|aarch64)$" OR LIBMPV_GENERATOR_PLATFORM MATCHES "^(arm64|aarch64)$")
-  set(LIBMPV "mpv-dev-aarch64-20260910-git-41f6a64.zip")
-  set(LIBMPV_SHA256 "b6770fbab3c8d61a1c461fe7a019768b9cdc96de7ca57611d6c9557446f78d0a")
+  set(LIBMPV "mpv-dev-aarch64-20261031-git-41f6a64.zip")
+  set(LIBMPV_SHA256 "0ab5078171d7084b2f1cbb02364562503e2ac2cfb5d7cd2c069891d42b68a9a5")
 else()
-  set(LIBMPV "mpv-dev-x86_64-20260910-git-41f6a64.7z")
-  set(LIBMPV_SHA256 "fadaabd0f7e25f3d6aca182c6112d900ac800aa7ae1bfe0ddf119e86ee20c68c")
+  set(LIBMPV "mpv-dev-x86_64-20261031-git-41f6a64.7z")
+  set(LIBMPV_SHA256 "9aa34bb37cc27e297135bcc9a2e9d4c5fe511066e115c4ad413247bd2369b38c")
 endif()
 
 # Download URL of the libmpv archive.
-set(LIBMPV_URL "https://github.com/Lampon/libmpv-win32-video-cmake/releases/download/20260911/${LIBMPV}")
+set(LIBMPV_URL "https://github.com/Lampon/libmpv-win32-video-cmake/releases/download/20261031/${LIBMPV}")
 
 # Download location of the libmpv archive.
 set(LIBMPV_ARCHIVE "${CMAKE_BINARY_DIR}/${LIBMPV}")

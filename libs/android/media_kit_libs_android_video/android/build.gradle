@@ -58,9 +58,9 @@ task downloadDependencies(type: Exec) {
 
         // Download all *.jar dependencies & verify their MD5 checksums.
         def filesToDownload = [
-            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261018/default-arm64-v8a.jar", "md5": "fe9ea6cf26d76d77293e9222cdaf2d97", "destination": file("$buildDir/20261018/default-arm64-v8a.jar")],
-            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261018/default-armeabi-v7a.jar", "md5": "1186c2554eb0718f8b9befddcd0c07fb", "destination": file("$buildDir/20261018/default-armeabi-v7a.jar")],
-            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261018/default-x86_64.jar", "md5": "da63eb74333a171c22005c34ecd077b5", "destination": file("$buildDir/20261018/default-x86_64.jar")],
+            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261031/default-arm64-v8a.jar", "md5": "10bb3fa07fc88ba5cce9179a7c22c64f", "destination": file("$buildDir/20261031/default-arm64-v8a.jar")],
+            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261031/default-armeabi-v7a.jar", "md5": "a3be9a9c86245b685f9212a747d42089", "destination": file("$buildDir/20261031/default-armeabi-v7a.jar")],
+            ["url": "https://github.com/Lampon/libmpv-android-video-build/releases/download/20261031/default-x86_64.jar", "md5": "e0654fc6eafb7039256351a277145dc4", "destination": file("$buildDir/20261031/default-x86_64.jar")],
         ]
 
         filesToDownload.each { fileInfo ->
